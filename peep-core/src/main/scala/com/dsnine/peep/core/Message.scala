@@ -5,6 +5,7 @@ import javax.persistence._
 import java.util.{List => JList, ArrayList}
 
 @Entity
+@Table{val name="p_msg"}
 class Message {
 
   @Id @GeneratedValue

@@ -4,6 +4,7 @@ import javax.persistence._
 import java.util.{List => JList, ArrayList}
 
 @Entity
+@Table{val name="p_usr"}
 class User {
   
   @Id
@@ -12,15 +13,18 @@ class User {
   
   var name:String = _
   
-  var age:Int = _
-  
-  @OneToMany{val mappedBy="author", val targetEntity=classOf[PeepMessage], val cascade = Array(CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH)}
-  var messages:JList[PeepMessage] = new ArrayList[PeepMessage]()
+  @OneToMany{val mappedBy="author", val targetEntity=classOf[Message], val cascade = Array(CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH)}
+  var messages:JList[Message] = new ArrayList[Message]()
   
   @ManyToMany{val targetEntity=classOf[User], val cascade = Array(CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH)}
-  var followers:JList[PeepUser] = new ArrayList[PeepUser]()
-  
+	@JoinTable{val name="p_usr_follow"}
+  var followers:JList[User] = new ArrayList[User]()
+
+	override def toString() = name + ":" + id
+
+/*
   @ManyToMany{val targetEntity=classOf[User], val cascade = Array(CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH), val mappedBy="followers"}
-  var isFollowing:JList[PeepUser] = new ArrayList[PeepUser]()
+  var following:JList[User] = new ArrayList[User]()
+*/
   
 }
