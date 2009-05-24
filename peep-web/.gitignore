@@ -1,6 +1,0 @@
-target
-.manager
-.project
-.classpath
-*.db
-derby.log
